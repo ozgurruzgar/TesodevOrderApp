@@ -19,8 +19,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\src\Services\Order\Application\Application.csproj" />
-    <ProjectReference Include="..\src\Services\Order\Domain\Domain.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Order\Application\Application.csproj" />
+    <ProjectReference Include="..\..\..\src\Services\Order\Domain\Domain.csproj" />
   </ItemGroup>
 
   <ItemGroup>
