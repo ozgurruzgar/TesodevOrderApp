@@ -1,0 +1,14 @@
+﻿using TesodevOrderApp.Shared.Domain.Models.Base;
+
+namespace TesodevOrderApp.Shared.Domain.Models
+{
+    public class Address : IEntity
+    {
+        public string AddressLine { get; set; }
+        public string City { get; set; }
+        public string Country { get; set; }
+        public int CityCode { get; set; }
+
+        public Address() { }
+    }
+}

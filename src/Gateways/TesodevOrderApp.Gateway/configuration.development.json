@@ -1,0 +1,34 @@
+{
+  {
+    "Routes": [
+      {
+        "DownstreamPathTemplate": "/api/{everything}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5001
+          }
+        ],
+        "UpstreamPathTemplate": "/services/customer/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+        "UpstreamScheme": "https"
+      },
+      {
+        "DownstreamPathTemplate": "/api/{everything}",
+        "DownstreamScheme": "https",
+        "DownstreamHostAndPorts": [
+          {
+            "Host": "localhost",
+            "Port": 5003
+          }
+        ],
+        "UpstreamPathTemplate": "/services/order/{everything}",
+        "UpstreamHttpMethod": [ "Get", "Post", "Put", "Delete" ],
+        "UpstreamScheme": "https"
+      }
+    ],
+    "GlobalConfiguration": {
+      "BaseUrl": "https://localhost:5000"
+    }
+  }
