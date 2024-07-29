@@ -21,5 +21,10 @@
             public const string CustomerNotFound = "Customer was not found.";
             public const string InvalidOrder = "Order not valid.";
         }
+
+        public struct MailMessage
+        {
+            public const string MessageSubject = "Info about your orders.";
+        }
     }
 }

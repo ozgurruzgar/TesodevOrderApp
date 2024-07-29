@@ -47,7 +47,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerApplication.Tests",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CustomerWebAPI.Tests", "Tests\Customer\WebApi.Tests\CustomerWebAPI.Tests.csproj", "{5EF8B007-4636-4D8F-923D-2CE582BE15A2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderApplication.Tests", "Tests\Order\Application.Tests\OrderApplication.Tests.csproj", "{583B075E-6A2F-450E-A473-230896C098C8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OrderApplication.Tests", "Tests\Order\Application.Tests\OrderApplication.Tests.csproj", "{583B075E-6A2F-450E-A473-230896C098C8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
