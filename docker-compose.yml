@@ -1,0 +1,31 @@
+version: "3.8"
+services: 
+  customerdb:
+    image: postgres
+  Orderdb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  HangfireDb:
+    image: mcr.microsoft.com/mssql/server:2019-latest
+  rabbitmqcontainer:
+    image: rabbitmq:3.13.6-management
+  customer.api:
+    image: tesodev_customer_api_image
+    build: 
+      context: .
+      dockerfile: src/Services/Customer/WebAPI/DockerFile
+  Order.api:
+    image: tesodev_order_api_image
+    build: 
+      context: .
+      dockerfile: src/Services/Order/WebAPI/DockerFile 
+  Gateway.api:
+    image: tesodev_gateway_api_image
+    build: 
+      context: .
+      dockerfile: src/Gateways/TesodevOrderApp.Gateway/DockerFile            
+volumes:
+  customerdb_volume:
+  Orderdb_volume:
+  HangfireDb_volume:
+
+  

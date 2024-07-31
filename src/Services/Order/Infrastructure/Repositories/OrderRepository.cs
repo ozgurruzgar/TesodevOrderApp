@@ -2,7 +2,6 @@
 using Domain.Repositories;
 using Infrastructure.Context;
 using Microsoft.EntityFrameworkCore;
-using TesodevOrderApp.Shared.Domain.Models.Base;
 
 namespace Infrastructure.Repositories
 {

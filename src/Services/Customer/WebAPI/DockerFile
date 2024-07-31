@@ -1,0 +1,15 @@
+FROM mcr.microsoft.com/dotnet/sdk:8.0 as build
+WORKDIR /app
+EXPOSE 80
+COPY src/TesodevOrderApp.Shared/*.csproj src/TesodevOrderApp.Shared/
+COPY src/Services/Customer/Application/*.csproj src/Services/Customer/Application/
+COPY src/Services/Customer/Domain/*.csproj src/Services/Customer/Domain/
+COPY src/Services/Customer/Infrastructure/*.csproj src/Services/Customer/Infrastructure/
+COPY src/Services/Customer/WebAPI/*.csproj src/Services/Customer/WebAPI/
+RUN dotnet restore src/Services/Customer/WebAPI/*.csproj
+COPY . .
+RUN dotnet publish src/Services/Customer/WebAPI/*.csproj -c Release -o out
+FROM mcr.microsoft.com/dotnet/aspnet:8.0 as runtime
+WORKDIR /app
+COPY --from=build /app/out .
+ENTRYPOINT [ "dotnet", "WebAPI.dll" ]

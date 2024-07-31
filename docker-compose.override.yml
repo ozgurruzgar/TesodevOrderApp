@@ -1,0 +1,74 @@
+version: "3.8"
+services: 
+  customerdb:
+    container_name: customerdb
+    restart: always
+    ports: 
+     - "5432:5432"
+    volumes:
+     - customerdb_volume:/var/lib/postgresql/data
+    environment:
+     - POSTGRES_USER=admin
+     - POSTGRES_PASSWORD=password12*
+     - POSTGRES_DB=customerdb     
+  Orderdb:
+    container_name: Orderdb
+    restart: on-failure
+    ports:
+      - "1433:1433"     
+    volumes:
+      - Orderdb_volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password321*
+  HangfireDb:
+    container_name: HangfireDb
+    restart: on-failure
+    ports:
+      - "1444:1433"
+    volumes:
+      - HangfireDb_volume:/var/opt/mssql
+    environment:
+      - ACCEPT_EULA=Y
+      - MSSQL_SA_PASSWORD=Password123*
+  rabbitmqcontainer:
+    container_name: rabbitmqcontainer
+    restart: always
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+  customer.api:
+    container_name: customer.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ConnectionStrings:PostgreSQL=User ID=admin; Password=password12*; Server=customerdb; Port=5432; Database=customerdb
+      - ConnectionStrings:RabbitMQ=rabbitmqcontainer
+    ports:
+      - "5001:8080"
+    depends_on:
+      - customerdb
+  Order.api:
+    container_name: Order.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ServiceApiSettings:CustomerServiceURL=http://customer.api/api/customers
+      - EmailConfiguration:Name=Ozgur
+      - EmailConfiguration:From=noreply@tesodev.com
+      - EmailConfiguration:SmtpServer=smtp.gmail.com
+      - EmailConfiguration:Port=465
+      - EmailConfiguration:Username=ozgurruzgar0@gmail.com
+      - EmailConfiguration:Password=micc htxm bokf wmxa 
+      - ConnectionStrings:MSSQL=Server=Orderdb,1433; Database=OrderDb; User=sa; Password=Password321*; TrustServerCertificate=True
+      - ConnectionStrings:Hangfire=Server=HangfireDb,1433; Database=Hangfire; User=sa; Password=Password123*; TrustServerCertificate=True
+      - ConnectionStrings:RabbitMQ=rabbitmqcontainer
+    ports:
+      - "5002:8080"
+    depends_on:
+      - Orderdb
+      - HangfireDb
+  Gateway.api:
+    container_name: Gateway.api
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Production
+    ports:
+      - "5000:8080"            
